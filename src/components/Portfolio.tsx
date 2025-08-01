@@ -3,39 +3,48 @@ import { useState, useRef, useEffect } from "react";
 const projects = [
   {
     id: 1,
-    title: "Aurora X1 Development",
+    title: "McLaren P1",
     year: "2024",
-    category: "Electric Supercar",
-    description: "Revolutionary design process for our flagship electric supercar with autonomous capabilities.",
+    category: "Hypercar",
+    description: "The ultimate expression of McLaren's Formula 1 technology in a road car.",
     image: "https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?w=1200&h=800&fit=crop",
-    color: "#00D4FF"
+    color: "#FF6B35"
   },
   {
     id: 2,
-    title: "Quantum SUV Innovation",
+    title: "Lamborghini Huracán",
     year: "2024", 
-    category: "Luxury Autonomous",
-    description: "Next-generation family vehicle with advanced AI and sustainable materials.",
+    category: "Supercar",
+    description: "Italian excellence meets cutting-edge performance and design.",
     image: "https://images.unsplash.com/photo-1555215695-3004980ad54e?w=1200&h=800&fit=crop",
-    color: "#A855F7"
+    color: "#00FF87"
   },
   {
     id: 3,
-    title: "Neo Sedan Engineering", 
+    title: "Porsche 911 Turbo S", 
     year: "2023",
-    category: "Executive Electric",
-    description: "Streamlined design philosophy meeting cutting-edge performance technology.",
+    category: "Sports Car",
+    description: "The perfect balance of everyday usability and track-focused performance.",
     image: "https://images.unsplash.com/photo-1502161254066-6c74afbf07aa?w=1200&h=800&fit=crop",
-    color: "#06FFA5"
+    color: "#FFD700"
   },
   {
     id: 4,
-    title: "Charging Infrastructure",
+    title: "Ferrari SF90 Stradale",
     year: "2023",
-    category: "Technology",
-    description: "Smart charging network design for seamless electric vehicle integration.",
+    category: "Hybrid Supercar",
+    description: "Ferrari's most powerful production car, blending V8 power with electric innovation.",
     image: "https://images.unsplash.com/photo-1558618048-fbd25c89cd64?w=1200&h=800&fit=crop",
-    color: "#FF6B6B"
+    color: "#DC143C"
+  },
+  {
+    id: 5,
+    title: "Bugatti Chiron",
+    year: "2023",
+    category: "Hypercar",
+    description: "The pinnacle of automotive engineering, delivering unmatched luxury and speed.",
+    image: "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=1200&h=800&fit=crop",
+    color: "#4169E1"
   }
 ];
 
@@ -76,10 +85,10 @@ const Portfolio = () => {
       <div className="container mx-auto px-6">
         <div className="text-center mb-16 animate-fade-in">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Our <span className="text-transparent bg-gradient-primary bg-clip-text">Portfolio</span>
+            Featured <span className="text-gray-400">Vehicles</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Explore our innovative projects that are shaping the future of transportation
+            Discover our curated collection of the world's most exceptional automobiles
           </p>
         </div>
 
@@ -94,17 +103,19 @@ const Portfolio = () => {
                 onMouseEnter={() => setHoveredProject(project.id)}
                 onMouseLeave={() => setHoveredProject(null)}
               >
-                <div className="border-b border-border pb-6 hover:border-primary transition-colors duration-300">
+                <div className="border-b border-gray-800 pb-6 hover:border-white transition-colors duration-500">
                   <div className="flex items-center justify-between mb-2">
                     <h3 className={`text-2xl font-bold transition-colors duration-300 ${
-                      hoveredProject === project.id ? 'text-primary' : 'text-foreground group-hover:text-primary'
+                      hoveredProject === project.id ? 'text-white scale-105' : 'text-gray-300 group-hover:text-white'
                     }`}>
                       {project.title}
                     </h3>
-                    <span className="text-sm text-muted-foreground">{project.year}</span>
+                    <span className="text-sm text-gray-500">{project.year}</span>
                   </div>
-                  <p className="text-sm text-primary font-medium mb-3">{project.category}</p>
-                  <p className="text-muted-foreground leading-relaxed">{project.description}</p>
+                  <p className="text-sm font-medium mb-3" style={{ 
+                    color: hoveredProject === project.id ? project.color : '#9CA3AF' 
+                  }}>{project.category}</p>
+                  <p className="text-gray-400 leading-relaxed">{project.description}</p>
                 </div>
               </div>
             ))}
@@ -114,86 +125,70 @@ const Portfolio = () => {
           <div className="relative h-[600px] lg:sticky lg:top-20">
             {hoveredProjectData && (
               <div 
-                className="absolute inset-0 transition-all duration-500 ease-out"
+                className="absolute inset-0 transition-all duration-700 ease-out"
                 style={{
-                  transform: `translate(${(mousePosition.x - 300) * 0.1}px, ${(mousePosition.y - 300) * 0.1}px)`,
+                  transform: `translate(${(mousePosition.x - 300) * 0.05}px, ${(mousePosition.y - 300) * 0.05}px)`,
                 }}
               >
-                {/* Liquid morphing background */}
+                {/* Liquid ink spreading effect */}
                 <div 
-                  className="absolute inset-0 rounded-3xl animate-glow-pulse"
+                  className="absolute inset-0 rounded-3xl"
                   style={{
-                    background: `radial-gradient(circle at ${mousePosition.x}px ${mousePosition.y}px, ${hoveredProjectData.color}40, transparent 70%)`,
-                    filter: 'blur(20px)',
-                    transform: `scale(${1 + Math.sin(Date.now() * 0.001) * 0.1})`,
+                    background: `radial-gradient(circle at ${mousePosition.x * 0.8}px ${mousePosition.y * 0.8}px, ${hoveredProjectData.color}60, transparent 60%)`,
+                    filter: 'blur(30px)',
+                    animation: 'liquid-spread 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards',
                   }}
                 />
                 
-                {/* Splatter effect overlay */}
+                {/* Secondary liquid layer */}
                 <div 
-                  className="absolute inset-0 opacity-60"
+                  className="absolute inset-0 opacity-40"
                   style={{
-                    background: `radial-gradient(circle at ${mousePosition.x * 0.8}px ${mousePosition.y * 1.2}px, ${hoveredProjectData.color}60, transparent 50%), 
-                               radial-gradient(circle at ${mousePosition.x * 1.2}px ${mousePosition.y * 0.6}px, ${hoveredProjectData.color}40, transparent 40%)`,
-                    clipPath: `circle(${Math.min(mousePosition.x, mousePosition.y) * 0.5}px at ${mousePosition.x}px ${mousePosition.y}px)`,
+                    background: `radial-gradient(ellipse at ${mousePosition.x * 1.2}px ${mousePosition.y * 0.7}px, ${hoveredProjectData.color}40, transparent 70%)`,
+                    animation: 'liquid-spread 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s forwards',
+                    transform: 'scale(0)',
                   }}
                 />
                 
-                {/* Main image with morphing mask */}
+                {/* Main image with liquid reveal */}
                 <div 
-                  className="relative w-full h-full rounded-3xl overflow-hidden animate-scale-in"
+                  className="relative w-full h-full rounded-3xl overflow-hidden"
                   style={{
-                    clipPath: `polygon(
-                      ${Math.max(0, mousePosition.x * 0.1)}% ${Math.max(0, mousePosition.y * 0.1)}%,
-                      ${Math.min(100, 100 - (mousePosition.x * 0.05))}% ${Math.max(0, mousePosition.y * 0.1)}%,
-                      ${Math.min(100, 100 - (mousePosition.x * 0.05))}% ${Math.min(100, 100 - (mousePosition.y * 0.05))}%,
-                      ${Math.max(0, mousePosition.x * 0.1)}% ${Math.min(100, 100 - (mousePosition.y * 0.05))}%
-                    )`,
+                    clipPath: `circle(0% at ${mousePosition.x}px ${mousePosition.y}px)`,
+                    animation: 'liquid-reveal 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards',
                   }}
                 >
                   <img
                     src={hoveredProjectData.image}
                     alt={hoveredProjectData.title}
                     className="w-full h-full object-cover"
-                    style={{
-                      filter: `hue-rotate(${mousePosition.x * 0.5}deg) saturate(${1 + mousePosition.y * 0.001})`,
-                    }}
                   />
                   
-                  {/* Color overlay with mouse tracking */}
+                  {/* Subtle color overlay */}
                   <div 
-                    className="absolute inset-0 mix-blend-overlay opacity-30"
+                    className="absolute inset-0 mix-blend-overlay opacity-20"
                     style={{
-                      background: `linear-gradient(${mousePosition.x}deg, ${hoveredProjectData.color}, transparent)`,
+                      background: `linear-gradient(45deg, ${hoveredProjectData.color}30, transparent 60%)`,
                     }}
                   />
                 </div>
 
-                {/* Floating particles */}
-                <div className="absolute inset-0 pointer-events-none">
-                  {[...Array(5)].map((_, i) => (
-                    <div
-                      key={i}
-                      className="absolute w-2 h-2 rounded-full animate-float"
-                      style={{
-                        left: `${mousePosition.x + (i * 50) % 100}px`,
-                        top: `${mousePosition.y + (i * 30) % 100}px`,
-                        backgroundColor: hoveredProjectData.color,
-                        animationDelay: `${i * 0.2}s`,
-                        opacity: 0.6,
-                      }}
-                    />
-                  ))}
+                {/* Vehicle title overlay */}
+                <div className="absolute bottom-8 left-8 z-10">
+                  <h3 className="text-3xl font-bold text-white mb-2">{hoveredProjectData.title}</h3>
+                  <p className="text-lg" style={{ color: hoveredProjectData.color }}>
+                    {hoveredProjectData.category}
+                  </p>
                 </div>
               </div>
             )}
 
             {/* Placeholder when no hover */}
             {!hoveredProjectData && (
-              <div className="absolute inset-0 flex items-center justify-center text-muted-foreground animate-fade-in">
+              <div className="text-center text-gray-500 animate-fade-in h-full flex items-center justify-center">
                 <div className="text-center">
-                  <div className="text-6xl mb-4">🎨</div>
-                  <p className="text-lg">Hover over a project to see it come to life</p>
+                  <div className="text-6xl mb-4">🚗</div>
+                  <p className="text-lg">Hover over a vehicle to see it in detail</p>
                 </div>
               </div>
             )}

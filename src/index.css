@@ -156,6 +156,30 @@ All colors MUST be HSL.
     animation: morph 4s ease-in-out infinite;
   }
 
+  /* Liquid spreading animation for portfolio */
+  @keyframes liquid-spread {
+    0% {
+      transform: scale(0);
+      opacity: 0;
+    }
+    50% {
+      opacity: 0.8;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  @keyframes liquid-reveal {
+    0% {
+      clip-path: circle(0% at var(--mouse-x, 50%) var(--mouse-y, 50%));
+    }
+    100% {
+      clip-path: circle(100% at var(--mouse-x, 50%) var(--mouse-y, 50%));
+    }
+  }
+
   @keyframes morph {
     0%, 100% { border-radius: 50%; }
     33% { border-radius: 35% 65% 65% 35% / 65% 35% 65% 35%; }

@@ -23,32 +23,15 @@ const PreLoader = ({ onComplete }: PreLoaderProps) => {
   }, [onComplete]);
 
   return (
-    <div className="fixed inset-0 bg-background z-[9999] flex flex-col items-center justify-center">
+    <div className="fixed inset-0 bg-black z-[9999] flex flex-col items-center justify-center">
       {/* Progress counter */}
-      <div className="text-6xl md:text-8xl font-light text-foreground mb-4 animate-fade-in">
+      <div className="text-6xl md:text-8xl font-light text-white mb-8 animate-fade-in font-sans">
         {count}
       </div>
       
       {/* Main text */}
-      <div className="text-3xl md:text-5xl font-light text-center mb-8 max-w-4xl leading-relaxed">
-        <span className="text-foreground">EXPERIENCE THE</span>
-        <br />
-        <span className="text-transparent bg-gradient-primary bg-clip-text font-medium">
-          FUTURE OF MOBILITY
-        </span>
-      </div>
-      
-      {/* Secondary text */}
-      <div className="text-lg text-muted-foreground animate-fade-in" style={{ animationDelay: '0.5s' }}>
-        Please wait a few seconds.
-      </div>
-      
-      {/* Progress bar */}
-      <div className="w-80 h-0.5 bg-border mt-8 rounded-full overflow-hidden">
-        <div 
-          className="h-full bg-gradient-primary transition-all duration-100 ease-out"
-          style={{ width: `${count}%` }}
-        />
+      <div className="text-2xl md:text-4xl font-light text-center max-w-4xl leading-relaxed">
+        <span className="text-white font-sans">PREMIUM AUTOMOTIVE SHOWCASE</span>
       </div>
     </div>
   );

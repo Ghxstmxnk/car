@@ -3,19 +3,19 @@ import { useState } from "react";
 const teamMembers = [
   {
     id: 1,
-    name: "Dr. Sarah Chen",
-    title: "Chief Technology Officer",
+    name: "Marcus Rodriguez",
+    title: "Lead Designer",
     image: "https://images.unsplash.com/photo-1494790108755-2616b612b5bc?w=400&h=400&fit=crop&crop=face",
-    color: "#00D4FF",
-    bio: "Leading AI and autonomous vehicle development with 15+ years in automotive innovation."
+    color: "#FF6B35",
+    bio: "Visionary automotive designer with over 12 years of experience crafting iconic vehicle aesthetics."
   },
   {
     id: 2,
-    name: "Marcus Rodriguez",
-    title: "Lead Design Engineer", 
+    name: "Elena Vasquez",
+    title: "Performance Engineer", 
     image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face",
-    color: "#A855F7",
-    bio: "Visionary designer shaping the future of sustainable transportation aesthetics."
+    color: "#00FF87",
+    bio: "Expert in high-performance automotive engineering, specializing in aerodynamics and powertrain optimization."
   }
 ];
 
@@ -25,14 +25,14 @@ const TeamSection = () => {
   const hoveredMemberData = teamMembers.find(member => member.id === hoveredMember);
 
   return (
-    <section id="team" className="py-20 relative">
+    <section id="team" className="py-20 relative bg-black">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16 animate-fade-in">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Our <span className="text-transparent bg-gradient-primary bg-clip-text">Team</span>
+            Meet Our <span className="text-gray-400">Team</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Meet the visionaries driving innovation in future mobility
+            The talented individuals behind our automotive excellence
           </p>
         </div>
 
@@ -51,8 +51,11 @@ const TeamSection = () => {
                   <div className="flex-1">
                     <h3 className={`text-3xl font-bold transition-all duration-300 ${
                       hoveredMember === member.id 
-                        ? 'text-primary transform scale-105' 
-                        : 'text-foreground group-hover:text-primary'
+                        ? 'transform scale-105' 
+                        : 'text-white group-hover:text-white'
+                    style={{
+                      color: hoveredMember === member.id ? member.color : '#ffffff'
+                    }}
                     }`}>
                       {member.name}
                     </h3>
@@ -63,10 +66,10 @@ const TeamSection = () => {
                         ? 'max-h-20 opacity-100 mt-3' 
                         : 'max-h-0 opacity-0'
                     }`}>
-                      <p className="text-lg font-medium" style={{ color: member.color }}>
+                      <p className="text-lg font-medium text-gray-300">
                         {member.title}
                       </p>
-                      <p className="text-muted-foreground mt-2 text-sm leading-relaxed">
+                      <p className="text-gray-400 mt-2 text-sm leading-relaxed">
                         {member.bio}
                       </p>
                     </div>
@@ -94,65 +97,53 @@ const TeamSection = () => {
               <div className="relative animate-scale-in">
                 {/* Vibrant background circle */}
                 <div 
-                  className="absolute inset-0 w-80 h-80 mx-auto rounded-full animate-glow-pulse"
+                  className="absolute inset-0 w-80 h-80 mx-auto rounded-full"
+                  style={{ 
+                    backgroundColor: hoveredMemberData.color,
+                    filter: 'blur(40px)',
+                    transform: 'scale(1.4)',
+                    animation: 'pulse 2s ease-in-out infinite',
+                  }}
+                />
+                
+                {/* Secondary vibrant layer */}
+                <div 
+                  className="absolute inset-0 w-80 h-80 mx-auto rounded-full opacity-60"
                   style={{ 
                     backgroundColor: hoveredMemberData.color,
                     filter: 'blur(20px)',
                     transform: 'scale(1.2)',
                   }}
                 />
-                
-                {/* Secondary glow effect */}
-                <div 
-                  className="absolute inset-0 w-80 h-80 mx-auto rounded-full opacity-40 animate-pulse"
-                  style={{ 
-                    background: `radial-gradient(circle, ${hoveredMemberData.color}60, transparent 70%)`,
-                    transform: 'scale(1.5)',
-                  }}
-                />
 
                 {/* Main image container */}
                 <div 
                   className="relative w-80 h-80 mx-auto rounded-full overflow-hidden border-4 transition-all duration-500 hover:scale-105"
-                  style={{ borderColor: hoveredMemberData.color }}
+                  style={{ 
+                    borderColor: hoveredMemberData.color,
+                    boxShadow: `0 0 60px ${hoveredMemberData.color}80`
+                  }}
                 >
                   <img
                     src={hoveredMemberData.image}
                     alt={hoveredMemberData.name}
                     className="w-full h-full object-cover"
                   />
-                  
-                  {/* Gradient overlay */}
-                  <div 
-                    className="absolute inset-0 opacity-20"
-                    style={{
-                      background: `linear-gradient(45deg, ${hoveredMemberData.color}, transparent)`,
-                    }}
-                  />
                 </div>
 
-                {/* Floating accent elements */}
-                <div className="absolute inset-0 pointer-events-none">
-                  {[...Array(3)].map((_, i) => (
-                    <div
-                      key={i}
-                      className="absolute w-4 h-4 rounded-full animate-float"
-                      style={{
-                        backgroundColor: hoveredMemberData.color,
-                        left: `${20 + i * 25}%`,
-                        top: `${15 + i * 20}%`,
-                        animationDelay: `${i * 0.5}s`,
-                        opacity: 0.6,
-                      }}
-                    />
-                  ))}
+                {/* Name and title overlay */}
+                <div className="absolute bottom-[-60px] left-1/2 transform -translate-x-1/2 text-center">
+                  <h4 className="text-xl font-bold text-white mb-1">{hoveredMemberData.name}</h4>
+                  <p className="text-sm" style={{ color: hoveredMemberData.color }}>
+                    {hoveredMemberData.title}
+                  </p>
                 </div>
               </div>
             )}
 
             {/* Placeholder when no hover */}
             {!hoveredMemberData && (
-              <div className="text-center text-muted-foreground animate-fade-in">
+              <div className="text-center text-gray-500 animate-fade-in">
                 <div className="w-80 h-80 mx-auto rounded-full border-2 border-dashed border-border flex items-center justify-center">
                   <div>
                     <div className="text-6xl mb-4">👥</div>
