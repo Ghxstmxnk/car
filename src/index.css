@@ -135,4 +135,41 @@ All colors MUST be HSL.
     transform: translateY(-5px);
     box-shadow: 0 20px 40px hsl(220 30% 5% / 0.8);
   }
+
+  /* Liquid morphing effects */
+  .liquid-morph {
+    filter: url("#liquid");
+    transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Enhanced animations */
+  .animate-scale-in {
+    animation: scale-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .animate-morph {
+    animation: morph 4s ease-in-out infinite;
+  }
+
+  @keyframes morph {
+    0%, 100% { border-radius: 50%; }
+    33% { border-radius: 35% 65% 65% 35% / 65% 35% 65% 35%; }
+    66% { border-radius: 65% 35% 35% 65% / 35% 65% 35% 65%; }
+  }
+
+  @keyframes scale-in {
+    0% {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
 }
